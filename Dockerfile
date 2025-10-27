@@ -4,11 +4,13 @@ FROM node:18-alpine
 # 设置工作目录
 WORKDIR /app
 
-# 复制 package.json 并安装依赖
-COPY package.json ./
+# 先复制 package.json 和 package-lock.json
+COPY package*.json ./
+
+# 安装依赖
 RUN npm install
 
-# 复制其余文件到工作目录
+# 复制剩余项目文件
 COPY . .
 
 # 暴露端口（确保 index.js 监听同端口）
